@@ -28,7 +28,27 @@ namespace PersoonlijkeInfo.Wpf
             cmbLengte.Items.Add(185);
         }
 
+        private void btnVatSamen_Click(object sender, RoutedEventArgs e)
+        {
+            string volledigeNaam;
+            int lengte;
+            int gewicht;
+            string rijksRegister;
+            string samenVatting;
 
+            volledigeNaam = txtVoornaam.Text + " " + txtFamilienaam.Text;
+            gewicht = (int)cmbGewicht.SelectedValue ;
+            lengte = (int)cmbLengte.SelectedValue;
+            rijksRegister = txtRijksregister.Text;
+
+            samenVatting = "Je naam is " + volledigeNaam + "\n";
+            samenVatting += $"Met een gewicht van {gewicht} en een lengte van {lengte} is je BMI {QI(lengte, gewicht)}\n";
+            samenVatting += $"Je rijksregisternummer is {rijksRegister.Substring(0, 6)}-{rijksRegister.Substring(6, 3)}" +
+            $"-{rijksRegister.Substring(9, 2)}\n";
+            samenVatting += "Het controlegetal van je rijksregisternummer is " + RijksRegisterControleGetal(rijksRegister);
+
+            lblSamenvatting.Content = "Samenvatting\n\n" + samenVatting;
+        }
 
         float QI(int lengte, int gewicht)
         {
